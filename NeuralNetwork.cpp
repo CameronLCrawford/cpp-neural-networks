@@ -1,15 +1,15 @@
 #include "NeuralNetwork.h"
 #include <math.h>
 
-NeuralNetwork::NeuralNetwork(char layers, char neurons[]) : layers(layers)
+NeuralNetwork::NeuralNetwork(char layers, char nodes[]) : layers(layers)
 {
 	std::vector<float> weightData;
-	nodeOutputs.push_back(Matrix(1, neurons[0], {}));
+	nodeOutputs.push_back(Matrix(1, nodes[0], {}));
 	for (int currentWeights = 0; currentWeights < layers - 1; currentWeights++)
 	{
 		weightData = {};
-		char rows = neurons[currentWeights];
-		char columns = neurons[currentWeights + 1];
+		char rows = nodes[currentWeights];
+		char columns = nodes[currentWeights + 1];
 		int currentWeightsSize = rows * columns;
 		for (int randomWeight = 0; randomWeight < currentWeightsSize; randomWeight++)
 		{
@@ -17,10 +17,10 @@ NeuralNetwork::NeuralNetwork(char layers, char neurons[]) : layers(layers)
 		}
 		weights.push_back(Matrix(rows, columns, weightData));
 		weightDeltas.push_back(Matrix(rows, columns, std::vector<float>(currentWeightsSize, 0)));
-		nodeOutputs.push_back(Matrix(1, neurons[currentWeights + 1], std::vector<float>(neurons[currentWeights + 1], 0.0f)));
+		nodeOutputs.push_back(Matrix(1, nodes[currentWeights + 1], std::vector<float>(nodes[currentWeights + 1], 0.0f)));
 		if (currentWeights != layers - 2)
 		{
-			nodeErrorTerms.push_back(std::vector<float>(neurons[currentWeights + 1], 0.0f));
+			nodeErrorTerms.push_back(std::vector<float>(nodes[currentWeights + 1], 0.0f));
 		}
 	}
 }
