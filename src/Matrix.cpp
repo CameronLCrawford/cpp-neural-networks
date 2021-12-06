@@ -32,6 +32,7 @@ float Matrix::operator()(char row, char column)
 	return matrixData[row * matrixDimensions.columns + column];
 }
 
+// Matrix multiplication
 Matrix Matrix::operator*(Matrix &otherMatrix)
 {
 	if (matrixDimensions.columns != otherMatrix.getDimensions().rows)
@@ -63,6 +64,7 @@ Matrix Matrix::operator*(Matrix &otherMatrix)
 	return Matrix(thisRows, otherColumns, resultData);
 }
 
+// Matrix addition
 Matrix Matrix::operator+(Matrix &otherMatrix)
 {
 	std::vector<float> resultData;
@@ -78,6 +80,7 @@ Matrix Matrix::operator+(Matrix &otherMatrix)
 	return Matrix(matrixDimensions.rows, matrixDimensions.columns, resultData);
 }
 
+// Matrix subtraction
 Matrix Matrix::operator-(Matrix &otherMatrix)
 {
 	std::vector<float> resultData;
@@ -93,6 +96,7 @@ Matrix Matrix::operator-(Matrix &otherMatrix)
 	return Matrix(matrixDimensions.rows, matrixDimensions.columns, resultData);
 }
 
+// Outputs matrix to terminal
 std::ostream& operator<<(std::ostream &ostream, Matrix &thisMatrix)
 {
 	char rowCount = thisMatrix.matrixDimensions.rows;
@@ -135,6 +139,7 @@ std::ostream& operator<<(std::ostream &ostream, Matrix &thisMatrix)
 	return ostream;
 }
 
+// Helper function for matrix multiplication
 float dotProduct(float *row, float *column, char size)
 {
 	float result = 0;

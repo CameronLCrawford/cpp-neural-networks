@@ -10,12 +10,14 @@ int main()
 	std::vector<Matrix> trainOutput;
 	std::vector<Matrix> testData;
 	std::vector<Matrix> testOutput;
-	std::ifstream irisFile("iris.data");
+	std::ifstream irisFile("resources/iris.data");
 	float sepalLength, sepalWidth, petalLength, petalWidth;
 	std::string flowerType;
+	// Reads in each line of the file
 	for (int currentData = 0; currentData < 150; currentData++)
 	{
 		irisFile >> sepalLength >> sepalWidth >> petalLength >> petalWidth >> flowerType;
+		// Training data is first 10 of each flower type
 		if (50 - currentData % 50 > 10)
 		{
 			trainData.push_back(Matrix(1, 4, { sepalLength, sepalWidth, petalLength, petalWidth }));
@@ -40,6 +42,7 @@ int main()
 	std::cout << "Training";
 	for (int epoch = 0; epoch < epochs; epoch++)
 	{
+		// Train for number of epochs
 		for (int inputIndex = 0; inputIndex < 120; inputIndex++)
 		{
 			myNN.feedForward(trainData[inputIndex]);
@@ -52,6 +55,7 @@ int main()
 		}
 	}
 	std::cout << "\nTraining complete.\n \nEvaluating...\n";
+	// Test on testing data
 	for (int inputIndex = 0; inputIndex < 30; inputIndex++)
 	{
 		networkOutput = myNN.feedForward(testData[inputIndex]);
