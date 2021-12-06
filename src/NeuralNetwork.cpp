@@ -1,6 +1,8 @@
 #include "NeuralNetwork.h"
 #include <math.h>
 
+// Creates fully connect network of depth layers
+// Nodes specifies the number of nodes in each layers as an array
 NeuralNetwork::NeuralNetwork(char layers, char nodes[]) : layers(layers)
 {
 	std::vector<float> weightData;
@@ -115,11 +117,13 @@ void NeuralNetwork::updateWeights()
 	}
 }
 
+// Sigmoid activation function
 float sigmoid(float x)
 {
 	return 1 / (1 + exp(-x));
 }
 
+// Derivative of sigmoid activation function
 float sigmoidPrime(float x)
 {
 	return x * (1 - x);
